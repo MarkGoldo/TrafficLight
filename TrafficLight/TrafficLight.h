@@ -9,6 +9,7 @@ enum TrafficLightsState
     GREEN
 };
 
+// Класс для моделирования работы светофора
 class TrafficLight
 {
 private:
