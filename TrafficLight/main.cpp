@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <thread>
 #include <chrono>
 #include <windows.h>
@@ -8,33 +9,45 @@ using namespace std::chrono_literals;
 
 int main()
 {
-    // Настройка кодировки консоли
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 
-    // Создание адреса светофора
-    TrafficLightAddress address
+    try
     {
-        "Россия",
-        "Москва",
-        "Тверская улица",
-        55.758494,
-        37.613198
-    };
+        // Загружаем адреса трёх светофоров из JSON
+        std::vector<TrafficLight> trafficLights;
 
-    // Создание объекта светофора
-    TrafficLight trafficLight(address);
+        trafficLights.emplace_back(
+            LoadTrafficLightAddress("traffic_light_1.json"));
 
-    std::cout << "Программа TrafficLight запущена!" << std::endl;
-    std::cout << "Для завершения нажмите Ctrl + C." << std::endl;
+        trafficLights.emplace_back(
+            LoadTrafficLightAddress("traffic_light_2.json"));
 
-    // Бесконечный цикл
-    while (true)
+        trafficLights.emplace_back(
+            LoadTrafficLightAddress("traffic_light_3.json"));
+
+        std::cout << "Загружено светофоров: "
+            << trafficLights.size() << std::endl;
+
+        std::cout << "Мониторинг запущен. Для завершения нажмите Ctrl + C."
+            << std::endl;
+
+        // Мониторинг всех светофоров
+        while (true)
+        {
+            for (const auto& trafficLight : trafficLights)
+            {
+                trafficLight.GetInfo();
+            }
+
+            // Ожидание 23 секунды
+            std::this_thread::sleep_for(23000ms);
+        }
+    }
+    catch (const std::exception& e)
     {
-        trafficLight.GetInfo();
-
-        // Ожидание 23 секунды
-        std::this_thread::sleep_for(23000ms);
+        std::cerr << "Ошибка: " << e.what() << std::endl;
+        return 1;
     }
 
     return 0;

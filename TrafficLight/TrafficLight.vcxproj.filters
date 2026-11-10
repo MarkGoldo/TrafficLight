@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{0813190d-e90f-45cb-8686-80a6171af7e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TrafficLight.cpp">
@@ -29,5 +32,17 @@
     <ClInclude Include="TrafficLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="traffic_light_1.json">
+      <Filter>data</Filter>
+    </None>
+    <None Include="traffic_light_2.json">
+      <Filter>data</Filter>
+    </None>
+    <None Include="traffic_light_3.json">
+      <Filter>data</Filter>
+    </None>
   </ItemGroup>
 </Project>
